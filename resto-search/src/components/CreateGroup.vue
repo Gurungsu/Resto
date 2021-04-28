@@ -14,7 +14,7 @@
         <option v-for="(c,pos) in allAccounts" :value="allAccounts[pos]" :key="pos">{{allAccounts[pos]}}</option>
         </select>
         
-        <button v-on:click="addGroup"> Submit </button>
+        <button v-on:click="getData"> Submit </button>
       </section>
     
   </div>
@@ -53,6 +53,7 @@ readonly $appAuth!: FirebaseAuth
 groupName = "";
 zipCode = ""; 
 friend = ""; 
+currentUserEmail = "";
 allAccounts : string[] = []; 
 
 mounted(): void{
@@ -71,7 +72,14 @@ mounted(): void{
   });
 }
 
-addGroup(): void{
+getData(): void{
+  this.$appDB.collection("groups/")
+              .add({      
+              creatorEmail: this.$appAuth.currentUser?.email,
+              friendEmail: this.friend,
+              zipCode: this.zipCode
+              });
+
   const options : AxiosRequestConfig = {
   method: 'GET',
   url: 'https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/' + this.zipCode,
@@ -83,13 +91,9 @@ addGroup(): void{
 };
 
 axios.request(options).then(function (response) {
-	console.log(response.data.result);
   let restaurants = (response.data.result.data as IDictionary);
-  for (let key in restaurants){
-        let value = restaurants[key];
-        console.log((value as Rest).restaurant_name);
-        console.log((value as Rest).cuisines[0]);
-      }
+  console.log(restaurants);
+
 }).catch(function (error) {
 	console.error(error);
 });
