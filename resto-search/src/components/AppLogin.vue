@@ -51,6 +51,7 @@ export default class AppLogin extends Vue {
   private userEmail = "";
   private userPassword = "";
   private message = "";
+  $router: any;
   get noInput(): boolean {
     return this.userEmail.length === 0 || this.userPassword.length === 0;
   }
@@ -68,6 +69,12 @@ export default class AppLogin extends Vue {
       .createUserWithEmailAndPassword(this.userEmail, this.userPassword)
       .then((u) => {
         this.showMessage(`User create UID ${u.user?.uid}`);
+          this.$appDB
+          .collection('users/')
+            .add({      
+              userID: this.$appAuth.tenantId,
+              userEmail: this.userEmail
+            });
         this.$router.push({ path: "/group" });
       })
       .catch((err) => {

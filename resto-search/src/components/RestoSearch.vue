@@ -1,6 +1,6 @@
 <template>
   <div id="top"> 
-      <h1>Group function </h1>
+      <h1> Search Function </h1>
      </div>   
        
 </template>
@@ -12,7 +12,7 @@ import { FirebaseAuth } from "@firebase/auth-types";
 
 
 
-export default class Group extends Vue {
+export default class RestoSearch extends Vue {
   readonly $appAuth!: FirebaseAuth;
   readonly $appDB!: FirebaseFirestore;
 }

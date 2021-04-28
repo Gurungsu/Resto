@@ -1,6 +1,6 @@
 <template>
   <div id="top"> 
-      <h1>Group function </h1>
+      <h1>Group lol </h1>
 
       <router-link to="/category" replace>This page is working</router-link>
      </div>   

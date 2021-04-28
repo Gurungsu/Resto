@@ -2,17 +2,19 @@
   <v-app>  
 <div id="app">
   <v-app>
-    <v-content>
+    <v-main>
       <v-container> 
         <v-app-bar app color="#6495ED" height=90px>
-          <v-toolbar-title>Resto Search </v-toolbar-title>
+          <v-toolbar-title>Resto Search</v-toolbar-title>
           <v-spacer></v-spacer>
+          <v-btn v-if="userLoggedIn()" @click="goCreateGroupScreen" color=yellow> Create Groups </v-btn>
+          <v-btn v-if="userLoggedIn()" @click="goActiveGroupScreen" color=yellow> View Active Groups </v-btn>
           <v-btn v-if="userLoggedIn()" @click="doLogout" color=red>LogOut </v-btn>
           <v-btn v-else-if="doLogout" @click="userLoggedIn()" color=green >SignUp Below</v-btn>
         </v-app-bar>
       </v-container>
       <router-view></router-view>
-    </v-content>
+    </v-main>
   </v-app>
 </div>
    
@@ -27,29 +29,48 @@
 
 import { Component, Vue } from "vue-property-decorator";
 import AppLogin from "./components/AppLogin.vue";
-import Nav from "./components/Nav.vue";
+import CreateGroup from "./components/CreateGroup.vue";
+import RestoSearch from "./components/RestoSearch.vue";
+import Group from "./components/Group.vue";
+import firebase from "firebase/app";
 import { FirebaseFirestore } from "@firebase/firestore-types";
 import { FirebaseAuth } from "@firebase/auth-types";
 
 
 @Component({
   components: {
-  Nav,
+    CreateGroup,
+    Group,
     AppLogin,
+    RestoSearch,
   },
 })
 export default class App extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
+  $router: any;
 
   // This function is automatically called when
   // the App component is added to the DOM tree
   mounted(): void {
     //
   }
+
+  goCreateGroupScreen(): void{
+    this.$router.push({ path: "/CreateGroup" });
+  }
+
+  goActiveGroupScreen(): void{
+    this.$router.push({ path: "/group" });
+  }
+
+  goRestoSearchScreen(): void{
+    this.$router.push({ path: "/restosearch" });
+  }
+
   doLogout(): void {
     this.$appAuth.signOut();
-    this.$router.back(); // Go backward in the "history stack"
+    this.$router.push({path: "/"}); // Go backward in the "history stack"
   }
   userLoggedIn(): boolean {
     return this.$appAuth.currentUser?.uid !== undefined;
