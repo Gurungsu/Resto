@@ -9,12 +9,12 @@
         <label for="where"> Zip Code: </label>
         <input type="string" v-model="zipCode" id="zipCode"/>
 
-        <label for="category"> Friend: </label>
+        <label for="category" border-style=solid> Friend: </label>
         <select v-model="friend" id="category">
         <option v-for="(c,pos) in allAccounts" :value="allAccounts[pos]" :key="pos">{{allAccounts[pos]}}</option>
         </select>
         
-        <button v-on:click="getData"> Submit </button>
+        <button v-on:click="addGroup"> Submit </button>
       </section>
     
   </div>
@@ -53,7 +53,6 @@ readonly $appAuth!: FirebaseAuth
 groupName = "";
 zipCode = ""; 
 friend = ""; 
-currentUserEmail = "";
 allAccounts : string[] = []; 
 
 mounted(): void{
@@ -72,14 +71,7 @@ mounted(): void{
   });
 }
 
-getData(): void{
-  this.$appDB.collection("groups/")
-              .add({      
-              creatorEmail: this.$appAuth.currentUser?.email,
-              friendEmail: this.friend,
-              zipCode: this.zipCode
-              });
-
+addGroup(): void{
   const options : AxiosRequestConfig = {
   method: 'GET',
   url: 'https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/' + this.zipCode,
@@ -91,9 +83,13 @@ getData(): void{
 };
 
 axios.request(options).then(function (response) {
+	console.log(response.data.result);
   let restaurants = (response.data.result.data as IDictionary);
-  console.log(restaurants);
-
+  for (let key in restaurants){
+        let value = restaurants[key];
+        console.log((value as Rest).restaurant_name);
+        console.log((value as Rest).cuisines[0]);
+      }
 }).catch(function (error) {
 	console.error(error);
 });
@@ -106,5 +102,9 @@ axios.request(options).then(function (response) {
 
 
 <style scoped>
+input{
+  border-style: solid;
+  border-color: aqua;
+}
 
 </style>
