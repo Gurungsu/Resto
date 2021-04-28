@@ -10,6 +10,7 @@
   "dependencies": {
     "@firebase/firestore-types": "^2.2.0",
     "apexcharts": "^3.26.0",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "firebase": "^8.4.2",
     "vue": "^2.6.11",

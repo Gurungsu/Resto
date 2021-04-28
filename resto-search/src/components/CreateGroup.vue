@@ -27,6 +27,18 @@
 import { Component,  Vue} from 'vue-property-decorator';
 import { FirebaseFirestore, QueryDocumentSnapshot, QuerySnapshot } from "@firebase/firestore-types"
 import { FirebaseAuth } from "@firebase/auth-types";
+import axios, {AxiosRequestConfig} from "axios";
+
+  //Interface for JSON response for APOD
+interface IDictionary {
+    [index:string]: Rest;
+}
+
+interface Rest{
+  restaurant_name: string,
+  restaurant_phone: string,
+  cuisines: string[],
+}
 
 @Component({
     components: {
@@ -60,7 +72,27 @@ mounted(): void{
 }
 
 addGroup(): void{
-  console.log("Added");
+  const options : AxiosRequestConfig = {
+  method: 'GET',
+  url: 'https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/' + this.zipCode,
+  params: {page: '1'},
+  headers: {
+    'x-rapidapi-key': '8737dc0034msh083ba5aeb92208bp1e6704jsna7e669b4d023',
+    'x-rapidapi-host': 'us-restaurant-menus.p.rapidapi.com'
+  }
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data.result);
+  let restaurants = (response.data.result.data as IDictionary);
+  for (let key in restaurants){
+        let value = restaurants[key];
+        console.log((value as Rest).restaurant_name);
+        console.log((value as Rest).cuisines[0]);
+      }
+}).catch(function (error) {
+	console.error(error);
+});
 }
 }
 
