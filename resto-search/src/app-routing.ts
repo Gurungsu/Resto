@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter,{ RouteConfig } from "vue-router";
 import AppLogin from "./components/AppLogin.vue";
-import Nav from "./components/Nav.vue";
+import Group from "./components/Group.vue";
 import Friends from "./components/Friends.vue";
 
 Vue.use(VueRouter);
@@ -12,9 +12,9 @@ const myRoutes: Array<RouteConfig> = [
     component: AppLogin,
   },
   {
-    name: "Category",
-    path: "/category",
-    component: Nav,
+    name: "Groups",
+    path: "/group",
+    component: Group,
   },
   {
     name: "Expenses",

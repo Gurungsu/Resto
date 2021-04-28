@@ -2,7 +2,7 @@
   <div id="top"> 
       <h1>Group function </h1>
 
-      <router-link to="/" replace>This page is working</router-link>
+      <router-link to="/group" replace>This page is working</router-link>
      </div>   
        
 </template>
@@ -14,7 +14,7 @@ import { FirebaseAuth } from "@firebase/auth-types";
 
 
 
-export default class Friends extends Vue {
+export default class Group extends Vue {
   readonly $appAuth!: FirebaseAuth;
   readonly $appDB!: FirebaseFirestore;
 }

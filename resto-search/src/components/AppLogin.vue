@@ -16,14 +16,14 @@
       </v-form>
       <v-form>
         <v-text-field  
-        input name="Password" id="Password"  placeholder="Password" v-model="userPassword"
+        input name="Password" id="Password"  placeholder="Password" v-model="userPassword" 
+          type="password"
           label="Password" 
-          :type="showPassword ? 'text' : 'password'"  
           prepend-icon="mdi-lock"
-          @click:append="showPassword = !showPassword"
         />
       </v-form>
     </v-card-text>
+     {{ message }} 
       <v-divider></v-divider>
     <v-card-actions>
         <v-btn  elevation= "18" color= "green" :disabled="noInput" @click="createAccount"> SignUp</v-btn>
@@ -33,9 +33,6 @@
     </v-card>
   </v-app>
 </div>
-<div>
-      {{ message }}
-    </div>
 </div>
 </template>
 
@@ -47,7 +44,7 @@ import { FirebaseAuth } from "@firebase/auth-types";
 
 
 @Component
-export default class UserLogin extends Vue {
+export default class AppLogin extends Vue {
  
   readonly $appAuth!: FirebaseAuth;
   readonly $appDB!: FirebaseFirestore;
@@ -71,7 +68,7 @@ export default class UserLogin extends Vue {
       .createUserWithEmailAndPassword(this.userEmail, this.userPassword)
       .then((u) => {
         this.showMessage(`User create UID ${u.user?.uid}`);
-        this.$router.push({ path: "/category" });
+        this.$router.push({ path: "/group" });
       })
       .catch((err) => {
         this.showMessage(`Unable to create account ${err}`);
@@ -82,7 +79,7 @@ export default class UserLogin extends Vue {
       .signInWithEmailAndPassword(this.userEmail, this.userPassword)
       .then((u) => {
         this.showMessage(`Login successful UID ${u.user?.uid}`);
-        this.$router.push({ path: "/expenses" });
+        this.$router.push({ path: "/group" });
       })
       .catch((err) => {
         this.showMessage(`Unable to login ${err}`);
