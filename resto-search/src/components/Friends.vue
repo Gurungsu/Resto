@@ -2,7 +2,7 @@
   <div id="top"> 
       <h1>Group function </h1>
 
-      <router-link to="/" replace>This page is working</router-link>
+      <router-link to="/category" replace>This page is working</router-link>
      </div>   
        
 </template>

@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter,{ RouteConfig } from "vue-router";
 import AppLogin from "./components/AppLogin.vue";
 import Group from "./components/Group.vue";
-import Friends from "./components/Friends.vue";
+import Nav from "./components/Nav.vue";
 
 Vue.use(VueRouter);
 const myRoutes: Array<RouteConfig> = [
@@ -17,9 +17,9 @@ const myRoutes: Array<RouteConfig> = [
     component: Group,
   },
   {
-    name: "Expenses",
-    path: "/expenses",
-    component: Friends,
+    name: "Nav",
+    path: "/Nav",
+    component: Nav,
   },
 ];
 

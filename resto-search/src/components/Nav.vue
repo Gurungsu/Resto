@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link to="/expenses" replace>Search Function</router-link>
+    <router-link to="/Group" replace>Search Function</router-link>
     
   </div>
 </template>
