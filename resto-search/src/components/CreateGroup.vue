@@ -28,7 +28,7 @@
               <h1>Name : {{z.restaurant_name}}</h1><br/>
               <td><b>Cuisine:</b> {{z.cuisines[0]}}</td><br/>
               <td><b> Phone: </b>{{z.restaurant_phone}}</td>   
-
+<div id="c" width= "1px">
   <v-card
     class="mx-auto elevation-20"
     color="purple"
@@ -52,7 +52,7 @@
         size="18"
       ></v-rating>
     </v-card-actions>
-  </v-card>
+  </v-card></div>
 
           </div>
           </tr>
@@ -182,10 +182,17 @@ pushToDB(restList: Rest[]){
   border-radius: 0.5em;
   padding: 1em;
   margin: 0.6em;
-  box-shadow: 3px 5px 6px 7px hsla(108, 90%, 51%, 0.4);
+  box-shadow: 3px 5px 6px 7px hsla(0, 94%, 52%, 0.4);
   width:150%;
 }
 
+#c{
+  display: inline-block;
+  border-radius: 0.5em;
+  margin: 0.6em;
+  box-shadow: 3px 5px 6px 7px hsla(0, 94%, 52%, 0.4);
+  width:auto;
+}
 
 input{
   border-style: solid;
