@@ -183,7 +183,7 @@ pushToDB(restList: Rest[]){
   padding: 1em;
   margin: 0.6em;
   box-shadow: 3px 5px 6px 7px hsla(0, 94%, 52%, 0.4);
-  width:150%;
+  width:99%;
 }
 
 #c{
@@ -191,7 +191,7 @@ pushToDB(restList: Rest[]){
   border-radius: 0.5em;
   margin: 0.6em;
   box-shadow: 3px 5px 6px 7px hsla(0, 94%, 52%, 0.4);
-  width:auto;
+  width:75%;
 }
 
 input{
