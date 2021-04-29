@@ -28,7 +28,7 @@
               <h1>Name : {{z.restaurant_name}}</h1><br/>
               <td><b>Cuisine:</b> {{z.cuisines[0]}}</td><br/>
               <td><b> Phone: </b>{{z.restaurant_phone}}</td>   
-<div id="c" width= "1px">
+<!-- <div id="c" width= "1px">
   <v-card
     class="mx-auto elevation-20"
     color="purple"
@@ -52,7 +52,7 @@
         size="18"
       ></v-rating>
     </v-card-actions>
-  </v-card></div>
+  </v-card></div> -->
 
           </div>
           </tr>
@@ -105,7 +105,7 @@ zipCode = "";
 friend = ""; 
 allAccounts : string[] = []; 
 restaraunts : Rest[] = [];
-rating:4.3
+
 mounted(): void{
   this.$appDB
   .collection('/users')
