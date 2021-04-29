@@ -14,20 +14,30 @@
         <option v-for="(c,pos) in allAccounts" :value="allAccounts[pos]" :key="pos">{{allAccounts[pos]}}</option>
         </select>
         
-        <button v-on:click="submitButtonClicked"> Submit </button>
+        <button v-on:click="submitButtonClicked"> Resto-Search </button>
       </section>
 
-      <section >
-        
 
+          <section >
       <table v-if="groupDataNotEmpty">
+        <button v-on:click="createButtonClicked">Create This Group</button>
+        <button v-on:click="clearButtonClicked">Clear</button>
        <tbody>   
           <tr>
           <tr v-for="(z,pos) in restaraunts" :key="pos">
             <div id="crs" width= "1px">
               <h1>Name : {{z.restaurant_name}}</h1><br/>
               <td><b>Cuisine:</b> {{z.cuisines[0]}}</td><br/>
-              <td><b> Phone: </b>{{z.restaurant_phone}}</td>   
+              <td><b> Phone: </b>{{z.restaurant_phone}}</td><br/>
+              <td><b> Address: </b>{{z.address.formatted}}</td> 
+                      </div>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+
+            </div>
+          </div>
 <!-- <div id="c" width= "1px">
   <v-card
     class="mx-auto elevation-20"
@@ -54,17 +64,7 @@
     </v-card-actions>
   </v-card></div> -->
 
-          </div>
-          </tr>
-       
 
-
-      </tbody>
-    </table>
-        
-      </section>
-    </div>
-  </div>
 </template>
 
 
@@ -85,6 +85,9 @@ interface Rest{
   restaurant_name: string,
   restaurant_phone: string,
   cuisines: string[],
+  address: {
+    formatted: string,
+  }
 }
 
 @Component({
@@ -122,6 +125,21 @@ mounted(): void{
   });
 }
 
+  createButtonClicked():void{
+    this.$appDB.collection("groups/").add({
+      name: this.groupName,
+      firstUser: this.$appAuth.currentUser.email,
+      secondUser: this.friend,
+      restaraunts: this.restaraunts
+    });
+    alert("Group: " + this.groupName + " has been created!");
+    this.clearButtonClicked();
+  }
+
+  clearButtonClicked():void{
+    this.restaraunts = [];
+  }
+
   submitButtonClicked():void{
     this.requestData(this.restaraunts);
   }
@@ -155,18 +173,6 @@ mounted(): void{
         console.error(error);
         });
   }
-
-pushToDB(restList: Rest[]){
-  console.log(restList.length);
-  for(let i = 0; i < restList.length; i++){
-    console.log(restList[i].restaurant_name);
-  }
-  this.$appDB.collection("/groups").add({
-    creatorUser: this.$appAuth.currentUser.email,
-    friendUser: this.friend,
-    restoList: restList
-    });
-}
 }
 
 </script>
@@ -196,6 +202,16 @@ pushToDB(restList: Rest[]){
 
 input{
   border-style: solid;
-  border-color: aqua;
+  border-color: rgb(0, 0, 0);
+}
+
+button{
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+}
+
+select{
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
 }
 </style>
