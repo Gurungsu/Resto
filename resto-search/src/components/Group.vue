@@ -1,6 +1,8 @@
 <template>
   <div id="top"> 
       <h1>Group function </h1>
+
+      
      </div>   
        
 </template>

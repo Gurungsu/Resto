@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div><div id="crs" width= "1px">
         <section id="input">
         <h1> Enter Group Information </h1>
 
@@ -18,24 +18,52 @@
       </section>
 
       <section >
+        
 
       <table v-if="groupDataNotEmpty">
-        <tbody>
+       <tbody>   
           <tr>
-              <td> Name </td> 
-              <td> Cuisine </td> 
-              <td> Phone </td> 
-          </tr>
           <tr v-for="(z,pos) in restaraunts" :key="pos">
-              <td>{{z.restaurant_name}}</td>
-              <td>{{z.cuisines[0]}}</td>
-              <td>{{z.restaurant_phone}}</td>
+            <div id="crs" width= "1px">
+              <h1>Name : {{z.restaurant_name}}</h1><br/>
+              <td><b>Cuisine:</b> {{z.cuisines[0]}}</td><br/>
+              <td><b> Phone: </b>{{z.restaurant_phone}}</td>   
+
+  <v-card
+    class="mx-auto elevation-20"
+    color="purple"
+    dark
+    style="max-width: 700px;"
+    
+  >
+               <v-card-actions class="pa-4">
+      Rate this restaurant
+      <v-spacer></v-spacer>
+      <span class="grey--text text--lighten-2 caption mr-2">
+        ({{ rating }})
+      </span>
+      <v-rating
+        v-model="rating"
+        background-color="white"
+        color="yellow accent-4"
+        dense
+        half-increments
+        hover
+        size="18"
+      ></v-rating>
+    </v-card-actions>
+  </v-card>
+
+          </div>
           </tr>
+       
+
+
       </tbody>
     </table>
-
+        
       </section>
-    
+    </div>
   </div>
 </template>
 
@@ -68,13 +96,16 @@ interface Rest{
 export default class CreateGroup extends Vue {
 readonly $appDB!: FirebaseFirestore;
 readonly $appAuth!: FirebaseAuth
-
+data: () => ({
+      rating: 4.3,
+    })
+  
 groupName = "";
 zipCode = ""; 
 friend = ""; 
 allAccounts : string[] = []; 
 restaraunts : Rest[] = [];
-
+rating:4.3
 mounted(): void{
   this.$appDB
   .collection('/users')
@@ -144,6 +175,18 @@ pushToDB(restList: Rest[]){
 
 
 <style scoped>
+
+#crs{
+  display: inline-block;
+  border: 2px solid hsl(110, 52%, 51%);
+  border-radius: 0.5em;
+  padding: 1em;
+  margin: 0.6em;
+  box-shadow: 3px 5px 6px 7px hsla(108, 90%, 51%, 0.4);
+  width:150%;
+}
+
+
 input{
   border-style: solid;
   border-color: aqua;
